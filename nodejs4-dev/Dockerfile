@@ -7,7 +7,11 @@ RUN apt-get install -yq \
     curl \
     git \
     vim \
-    build-essential
+    build-essential \
+    python-software-properties \
+    python \
+    g++ \
+    make
 
 # Install vimified
 RUN curl -L https://raw.githubusercontent.com/hanqin/vimified/master/install.sh | sh
@@ -30,14 +34,11 @@ RUN sudo apt-get install -y nodejs
 RUN node -v && npm -v
 
 # Prepare tools
-RUN npm --registry=https://registry.npm.taobao.org \
---cache=$HOME/.npm/.cache/cnpm \
---disturl=https://npm.taobao.org/dist \
---userconfig=$HOME/.cnpmrc \
-install -g \
+RUN npm --registry=https://registry.npm.taobao.org install -g \
     bunyan \
     nodemon \
-    gulp
+    gulp \
+    cnpm
 
 # Workdir
 ENV APP /app
